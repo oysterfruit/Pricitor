@@ -1,4 +1,4 @@
- //declaring and linking funcions, setting up default data
+ //declaring and linking functions, setting up default data
   jQuery('document').ready(function($){
 
       var strDate = '';
@@ -40,27 +40,53 @@
               });
 
       //trap the form submit to validate entries
-           /* jQuery('#myForm').submit(function() {
+           jQuery('#myForm').submit(function() {
 
-              event.preventDefault();
+
               var bValid = true;
 
-              alert("here!");
               if (jQuery("#resortNameHidden").val() == ""){
-
               //display error and don't submit form
-              jQuery("#resortError").text("Oops! You need to select a resort");
+              jQuery("#resortError").text("Oops! You need to select a resort.");
+                  bValid = false;
+              }
+               else{
+                 //clear error text
+                 jQuery("#resortError").text("");
+               }
 
-                bValid = false;
 
-                }
+              // var selId = "test";
+              var selId = jQuery("#daysSelect").find(':selected').val();
+
+              if (jQuery.isNumeric(selId) == false){
+                //display error and don't submit form
+                jQuery("#daysError").text("Oops! You need to select # days.");
+                  bValid = false;
+              }
+             else{
+                 //clear error text
+                 jQuery("#daysError").text("");
+               }
+
+
+              if (isValidDate(jQuery("#startDate"), 'dd M yy') == false){
+                //display error and don't submit form
+                jQuery("#dateError").text("Oops! You need to select a startDate.");
+                  bValid = false;
+              }
+             else{
+                 //clear error text
+                 jQuery("#dateError").text("");
+               }
+
 
               if (bValid == false){
                   event.preventDefault();
 
               }
 
-              });//end form submit function*/
+              });//end form submit function
 
       //switch tables when previous 7 days button is pressed
   jQuery('#Previous7').click(function() {
@@ -162,11 +188,11 @@
     var vDays = jQuery('#daysHidden').val();
     jQuery('#daysSelect option[value=' + vDays + ']').prop('selected','selected');
 
+
+    //highlight the cheapest price row
     var rowID = jQuery("#cheapestRow").text();
     var startColID = jQuery("#selectedColStart").text();
     var endColID = jQuery("#selectedColEnd").text();
-
-
     var i = parseInt(startColID);
     var j = parseInt(endColID);
     while (i <= j){
@@ -175,3 +201,16 @@
       }
 
   }); //end document ready function
+
+  function isValidDate(controlName, format){
+    var isValid = true;
+
+    try{
+        jQuery.datepicker.parseDate(format, jQuery(controlName).val(), null);
+    }
+    catch(error){
+        isValid = false;
+    }
+
+    return isValid;
+}

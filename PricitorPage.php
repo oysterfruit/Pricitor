@@ -79,7 +79,12 @@ require '/pricitor/PricitorFunctions.php';
   <input type="hidden" name="packageId_hidden" id="packageIdHidden" value="<?php echo htmlspecialchars($packageId);?>">
   <div class="well semi-transparent-well">
   <div class="container-fluid add-small-gap">
-  <div class = "row"><div class = "col-md-3 col-md-offset-2"><label id="resortError"></label></div></div>
+  <!--add a row to contain the error labels -->
+  <div class = "row">
+      <div class = "col-md-3 col-md-offset-2"><label id="resortError"></label></div>
+      <div class = "col-md-2 col-md-offset-1"><label id="daysError"></label></div>
+      <div class = "col-md-3 col-md-offset-1"><label id="dateError"></label></div>
+  </div>
   <div class="row">
         <div class="col-md-2">
             <h4>I'm heading to</h4>
@@ -138,7 +143,7 @@ require '/pricitor/PricitorFunctions.php';
                 else
                 {
                   //need to display Days?
-                  $optionD = "<option selected disabled> ";
+                  $optionD = "<option selected disabled value=''> ";
                   $optionD .= $days;
                   $optionD .= "</option>";
                   echo $optionD;
