@@ -209,7 +209,8 @@
     var i = parseInt(startColID);
     var j = parseInt(endColID);
     while (i <= j){
-        jQuery('tr[name=cost' + rowID + '] > td[name=tcol' + i + ']').addClass('highlight_price');
+        jQuery('tr[name=cost' + rowID + '] > td[name=tcol' + i + ']').removeClass('info');
+        jQuery('tr[name=cost' + rowID + '] > td[name=tcol' + i + ']').addClass('success');
         i = i+1;
       }
 

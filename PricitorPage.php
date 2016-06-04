@@ -228,7 +228,7 @@ require '/pricitor/PricitorFunctions.php';
       <div class="row add-sm-gap">
           <div class="col-md-12 text-center">
             <!--<a class="btn btn-primary lg-go-btn" href="#" role="button" type="submit">Go</a>-->
-            <input id="btnGo" type="Submit" value="Go" class = "btn lg-go-btn">
+            <input id="btnGo" type="Submit" value="go" class = "btn btn-primary btn-size-lg">
         </div>
       </div>
     </div>

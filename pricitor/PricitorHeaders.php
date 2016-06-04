@@ -83,7 +83,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
      else
      {
        if (strtotime($loop_date) >= strtotime($startdate) && strtotime($loop_date) <= strtotime($duration_end)){
-         $table_headers = $table_headers . " class='highlight_days center_cell'";
+         $table_headers = $table_headers . " class='info center_cell'";
 
          //store the col id's of the start and end cols of the chosen dates
          if (strtotime($loop_date) == strtotime($startdate)){
@@ -141,7 +141,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
     $cheapest_row = 1;
     while($row = $result->fetch_assoc()) {
       $str_weblink = $row["weblink"];
-      $str_gobutton = "<td><a href='" . $str_weblink . "' target='_blank' role='button' class='btn btn-go'><i class='fa fa-shopping-cart' aria-hidden='true'></i></a></td>";
+      $str_gobutton = "<td><a href='" . $str_weblink . "' target='_blank' role='button' class='btn btn-info'><i class='fa fa-shopping-cart' aria-hidden='true'></i></a></td>";
       $retailer_name = $row["name"];
       $retailer_id = $row["retailer_id"];
       $sql2 = "SELECT Start_date, End_Date, Price FROM price WHERE retailer_id = " . $retailer_id . " AND package_id = " . $package . " AND Days = " . $days;
@@ -185,7 +185,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
             else
            { //if the current cell is during the selected holiday period....
              if (strtotime($loop_date) >= strtotime($startdate) && strtotime($loop_date) <= strtotime($duration_end)){
-               $str_row = $str_row . " class='highlight_days center_cell'";
+               $str_row = $str_row . " class='info center_cell'";
                $str_total = "<td>$". sprintf('%01.0f', $price) . "</td>"; //total price for selected days
                if ($lowest_price == 0 && $price != "n/a"){
                  $lowest_price = $price;

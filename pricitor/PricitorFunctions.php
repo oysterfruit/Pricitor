@@ -11,8 +11,9 @@
 
   // Load the bootstrap stylesheet
 	//wp_enqueue_style( 'PriceComparator-bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' );
-  wp_enqueue_style( 'PriceComparator-bootstrapthemestyle', get_template_directory_uri() . '/pricitor/css/bootstrap.min.css' );
-	wp_style_add_data( 'PriceComparator-bootstrap', 'title', 'bootstrap' );
+  wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/cerulean/bootstrap.min.css' );
+  //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/lavish-bootstrap/css' );
+  wp_style_add_data( 'PriceComparator-bootstrap', 'title', 'bootstrap' );
 
    // Load the animate stylesheet
   //wp_enqueue_style( 'PriceComparator-Animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css' );
