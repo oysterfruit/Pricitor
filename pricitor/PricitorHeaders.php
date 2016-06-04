@@ -121,6 +121,9 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
  $table_headers = $table_headers . "</tr></thead>";
  echo $table_headers;
 
+
+
+
 //get grid data and format it
  require 'PricitorDB.php';
 
@@ -216,6 +219,8 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
     echo "No retailers found currently servicing " . $resortName . ". Oh dear!";
   }
   $conn->close();
+
+
 
 ?><!--end php -->
 

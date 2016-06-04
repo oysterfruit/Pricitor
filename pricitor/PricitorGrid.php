@@ -4,7 +4,7 @@
 
 <div class="well well-lg semi-transparent-well">
     <div class="table-responsive" id="priceTable">
-      <h1 class="text-center">Best Deals for <b><?PHP echo $packageName; ?></b> heading to <b><?PHP echo $resortName; ?></b> picking up on <b><?php echo date_format(date_create($startdate),"M d");?></b></h1>
+      <h1 id="tableBlurb" class="text-center">Best Deals for <b><?PHP echo $packageName; ?></b> heading to <b><?PHP echo $resortName; ?></b> picking up on <b><?php echo date_format(date_create($startdate),"M d");?></b></h1>
       <nav>
   <ul class="pager pad-left-160">
     <li class="previous" id = "Previous7"><a href="#"><span aria-hidden="true">&larr;</span> Previous 7 days</a></li>

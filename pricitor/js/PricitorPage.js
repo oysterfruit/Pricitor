@@ -72,7 +72,7 @@
 
               if (isValidDate(jQuery("#startDate"), 'dd M yy') == false){
                 //display error and don't submit form
-                jQuery("#dateError").text("Oops! You need to select a startDate.");
+                jQuery("#dateError").text("Oops! You need to select a start date.");
                   bValid = false;
               }
              else{
@@ -188,6 +188,19 @@
     var vDays = jQuery('#daysHidden').val();
     jQuery('#daysSelect option[value=' + vDays + ']').prop('selected','selected');
 
+
+    //if the table exists set focus to the table, otherwise set focus to the resort selector
+    if (jQuery('#tableBlurb').length) {
+
+        var new_position = jQuery('#tableBlurb').offset();
+        window.scrollTo(new_position.left,new_position.top-20);
+        //jQuery('#table1').focus();
+    }
+    else{
+      var new_position = jQuery('#topBlurb').offset();
+      window.scrollTo(new_position.left,new_position.top);
+      jQuery('#resortSelect').focus();
+    }
 
     //highlight the cheapest price row
     var rowID = jQuery("#cheapestRow").text();

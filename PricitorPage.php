@@ -59,7 +59,7 @@ require '/pricitor/PricitorFunctions.php';
 
   <div class="well semi-transparent-well">
 
-  <h1>Going skiing or snowboarding?</h1>
+  <h1 id="topBlurb">Going skiing or snowboarding?</h1>
   <h3>
     We can find the best deals on gear for your trip!
     </h3>
