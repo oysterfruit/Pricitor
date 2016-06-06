@@ -1,8 +1,8 @@
 <!-- start of results table area -->
-  <div class="first-background"> <!-- around the results area-->
-  <div class="container add-gap add-end-gap">
+  <!-- <div class="first-background"> around the results area-->
+  <div class="container add-end-gap">
 
-<div class="well well-lg semi-transparent-well">
+<div id= "tableWell" class="well well-lg">
     <div class="table-responsive" id="priceTable">
       <h1 id="tableBlurb" class="text-center">Best Deals for <b><?PHP echo $packageName; ?></b> heading to <b><?PHP echo $resortName; ?></b> picking up on <b><?php echo date_format(date_create($startdate),"M d");?></b></h1>
       <nav>
@@ -29,6 +29,6 @@
 </div>
 </div>
     </div>
-  </div>
+  <!-- </div> -->
 
 

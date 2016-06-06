@@ -20,6 +20,7 @@ $left_col_hidden= $right_col_hidden= $total_cols_hidden= $selected_col_start= $s
 
 $days_diff_str = "";
 
+
 switch ($days) {
     case "1":
     case "2":
@@ -47,8 +48,9 @@ switch ($days) {
 }
 
 if ($days_diff_str != ""){
-  $active_page_start= date("Y-m-d", strtotime($days_diff_str, strtotime($startdate)));
-  if (strtotime($active_page_start) < strtotime($startdate)){
+  $active_page_start= date("d M y", strtotime($days_diff_str, strtotime($startdate)));
+
+  if (strtotime($active_page_start) < strtotime($season_start_date)){
     $active_page_start = $startdate;
   }
 

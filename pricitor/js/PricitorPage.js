@@ -191,10 +191,10 @@
 
     //if the table exists set focus to the table, otherwise set focus to the resort selector
     if (jQuery('#tableBlurb').length) {
-
+       //alert("here!");
         var new_position = jQuery('#tableBlurb').offset();
         window.scrollTo(new_position.left,new_position.top-20);
-        //jQuery('#table1').focus();
+        jQuery('#tableWell').focus();
     }
     else{
       var new_position = jQuery('#topBlurb').offset();

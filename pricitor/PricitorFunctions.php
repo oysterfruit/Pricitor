@@ -11,8 +11,12 @@
 
   // Load the bootstrap stylesheet
 	//wp_enqueue_style( 'PriceComparator-bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' );
-  wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/cerulean/bootstrap.min.css' );
-  //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/lavish-bootstrap/css' );
+  //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/cerulean/bootstrap.min.css' );
+  //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/yeti/bootstrap.min.css' );
+  //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/superhero/bootstrap.min.css' );
+  //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/sandstone/bootstrap.min.css' );
+  //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/spaceman/bootstrap.min.css' );
+  wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/flatly/bootstrap.min.css' );
   wp_style_add_data( 'PriceComparator-bootstrap', 'title', 'bootstrap' );
 
    // Load the animate stylesheet

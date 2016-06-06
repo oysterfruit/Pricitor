@@ -14,9 +14,11 @@ require '/pricitor/PricitorFunctions.php';
 
   <?php
 
+
   // define variables and set to empty values
   $startdate = $package= $packageName= $packageId= $resort= $resortName= $days='';
   //check if the form has already been submitted, if so, read the selected options
+
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $startdate = test_input($_POST["start_date"]);
     //$startdate = strtotime($startdate);
@@ -53,11 +55,11 @@ require '/pricitor/PricitorFunctions.php';
    }
   ?>
 
-  <div class="first-background"> <!-- around the selection area-->
+ <!-- <div class="first-background"> around the selection area -->
 
-  <div class="container add-gap">
+  <div class="container">
 
-  <div class="well semi-transparent-well">
+  <div class="well">
 
   <h1 id="topBlurb">Going skiing or snowboarding?</h1>
   <h3>
@@ -77,13 +79,13 @@ require '/pricitor/PricitorFunctions.php';
   <input type="hidden" name="package_hidden" id="packageHidden" value=<?php echo $package; ?>>
   <input type="hidden" name="packageName_hidden" id="packageNameHidden" value="<?php echo htmlspecialchars($packageName);?>">
   <input type="hidden" name="packageId_hidden" id="packageIdHidden" value="<?php echo htmlspecialchars($packageId);?>">
-  <div class="well semi-transparent-well">
+  <div class="well">
   <div class="container-fluid add-small-gap">
   <!--add a row to contain the error labels -->
   <div class = "row">
-      <div class = "col-md-3 col-md-offset-2"><label id="resortError"></label></div>
-      <div class = "col-md-2 col-md-offset-1"><label id="daysError"></label></div>
-      <div class = "col-md-3 col-md-offset-1"><label id="dateError"></label></div>
+      <div class = "col-md-3 col-md-offset-2"><label id="resortError" class="label label-warning"></label></div>
+      <div class = "col-md-2 col-md-offset-1"><label id="daysError" class="label label-warning"></label></div>
+      <div class = "col-md-3 col-md-offset-1"><label id="dateError" class="label label-warning"></label></div>
   </div>
   <div class="row">
         <div class="col-md-2">
@@ -109,6 +111,8 @@ require '/pricitor/PricitorFunctions.php';
         <!--get resort options and add to dropdown-->
         <?php require '/pricitor/PricitorDB.php';
           $sql = "SELECT id, name FROM resort";
+
+try {
           $result = $conn->query($sql);
           $options = "";
             if ($result->num_rows > 0) {
@@ -121,7 +125,14 @@ require '/pricitor/PricitorFunctions.php';
                 echo "no resorts found";
             }
              $conn->close();
-        ?> <!--end php -->
+}catch (\Error $ex) { // Error is the base class for all internal PHP error exceptions.
+    var_dump($ex);
+    echo "Oops, something went wrong!  Please try again later.";
+}
+
+
+
+  ?> <!--end php -->
     </select>
           </div>
         <div class="col-md-3">
@@ -176,8 +187,8 @@ require '/pricitor/PricitorFunctions.php';
             </div>
             <div class= "col-md-9 text-left">
               <div class="input-group">
-                <input type="text" id="startDate" name="start_date" value="<?php echo $startdate;?>"/>
-                <label for="startDate" class="input-group-addon btn"><span class="glyphicon glyphicon-calendar"></span></label>
+                <input type="text" id="startDate" data-style="btn-warning" name="start_date" value="<?php echo $startdate;?>"/>
+                <label for="startDate" class="input-group-addon btn"><span class="fa fa-calendar"></span></label>
               </div>
            </div>
           </div>
@@ -239,7 +250,7 @@ require '/pricitor/PricitorFunctions.php';
     </div> <!--container -->
 
 <!-- end -->
-  </div> <!--div background -->
+  <!-- </div> div background -->
 
 <?php
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
