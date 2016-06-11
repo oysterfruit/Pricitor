@@ -200,3 +200,38 @@
 table {
   overflow-y:hidden;
 }
+
+/* Small devices (tablets,mobiles up to 992px) */
+@media (max-width: 992px) {
+    .text-center-sm {
+        text-align: center;
+    }
+
+  .text-right-sm {
+        text-align: right;
+    }
+
+  .text-left-sm {
+        text-align: left;
+    }
+
+  .add-small-gap-sm{
+  padding-top:10px;
+  }
+
+  .background-repeat-sm{
+    background-repeat: repeat;
+  }
+
+  .contacts-grid-sm{
+  padding: 5% 10% 20% 10%;
+}
+
+  .main-title-sm{
+  color:#f27d0c;
+  text-align:center;
+  font-size: 32px;
+  font-weight:bold;
+}
+
+}

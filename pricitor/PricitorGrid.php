@@ -14,7 +14,7 @@
       <table id= "table1" class="table table-striped table-condensed">
 
           <?php
-              include 'PricitorHeaders.php';
+              include DOCROOT .'/pricitor/PricitorHeaders.php';
           ?>
 
       </table>

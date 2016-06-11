@@ -143,7 +143,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
     $cheapest_row = 1;
     while($row = $result->fetch_assoc()) {
       $str_weblink = $row["weblink"];
-      $str_gobutton = "<td><a href='" . $str_weblink . "' target='_blank' role='button' class='btn btn-info'><i class='fa fa-shopping-cart' aria-hidden='true'></i></a></td>";
+      $str_gobutton = "<td><a href='" . $str_weblink . "' target='_blank' role='button' class='btn btn-info'><i class='fa fa-shopping-bag' aria-hidden='true'></i></a></td>";
       $retailer_name = $row["name"];
       $retailer_id = $row["retailer_id"];
       $sql2 = "SELECT Start_date, End_Date, Price FROM price WHERE retailer_id = " . $retailer_id . " AND package_id = " . $package . " AND Days = " . $days;
@@ -216,7 +216,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
     }//retailer/row while loop end
     $table_data = $table_data . "</tbody>";
     echo $table_data;
-  }//check if any retailers retruned for the selected resort
+  }//check if any retailers returned for the selected resort
   else {
     echo "No retailers found currently servicing " . $resortName . ". Oh dear!";
   }

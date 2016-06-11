@@ -3,12 +3,15 @@
 Template Name: PricitorPage
 */
 
+
   get_header();
+  define('DOCROOT', realpath(dirname(__FILE__)));
+  //echo DOCROOT;
 
 
 //set up jquery, javascript and enqueue required files
 
-require '/pricitor/PricitorFunctions.php';
+require DOCROOT . '/pricitor/PricitorFunctions.php';
 ?>
 
 
@@ -57,7 +60,7 @@ require '/pricitor/PricitorFunctions.php';
 
  <!-- <div class="first-background"> around the selection area -->
 
-  <div class="container">
+  <div id="bootstyle" class="container">
 
   <div class="well">
 
@@ -70,7 +73,7 @@ require '/pricitor/PricitorFunctions.php';
   </div> <!-- end first well -->
 
   <!-- try container??-->
-  <form id="myForm" role="form" method="post" action="http://localhost/wp1/prices/#">
+  <form id="myForm" role="form" method="post" action="#">
   <input type="hidden" name="pricecomp_hidden" id="pricitorHidden" value="Y">
   <input type="hidden" name="resort_hidden" id="resortHidden" value=<?php echo $resort;?>>
   <input type="hidden" name="resortName_hidden" id="resortNameHidden" value="<?php echo htmlspecialchars($resortName);?>">
@@ -109,7 +112,7 @@ require '/pricitor/PricitorFunctions.php';
             echo $optionD;
           }?>
         <!--get resort options and add to dropdown-->
-        <?php require '/pricitor/PricitorDB.php';
+        <?php require DOCROOT . '/pricitor/PricitorDB.php';
           $sql = "SELECT id, name FROM resort";
 
 try {
@@ -137,7 +140,7 @@ try {
           </div>
         <div class="col-md-3">
             <div class="row">
-              <div class="col-md-4 text-right">
+              <div class="col-md-4 text-right text-left-sm">
                 <h4>
                   For
                 </h4>
@@ -180,14 +183,14 @@ try {
 
         <div class="col-md-4" >
           <div class="row">
-            <div class="col-md-3 text-center">
+            <div class="col-md-3 text-center text-left-sm">
               <h4>
                 From
               </h4>
             </div>
             <div class= "col-md-9 text-left">
               <div class="input-group">
-                <input type="text" id="startDate" data-style="btn-warning" name="start_date" value="<?php echo $startdate;?>"/>
+                <input type="text" id="startDate" name="start_date" class="form-control" value="<?php echo $startdate;?>"/>
                 <label for="startDate" class="input-group-addon btn"><span class="fa fa-calendar"></span></label>
               </div>
            </div>
@@ -254,7 +257,7 @@ try {
 
 <?php
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include '/pricitor/PricitorGrid.php';
+    include DOCROOT . '/pricitor/PricitorGrid.php';
   }
 ?>
 

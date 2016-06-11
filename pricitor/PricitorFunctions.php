@@ -16,15 +16,17 @@
   //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/superhero/bootstrap.min.css' );
   //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/sandstone/bootstrap.min.css' );
   //wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/spaceman/bootstrap.min.css' );
-  wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/flatly/bootstrap.min.css' );
+
+  //this bootstrap file has been modified to allow the theme to control font etc
+  wp_enqueue_style( 'PriceComparator-bootstrap', get_template_directory_uri() . '/pricitor/css/flatly/bootstrap.css' );
   wp_style_add_data( 'PriceComparator-bootstrap', 'title', 'bootstrap' );
 
    // Load the animate stylesheet
-  //wp_enqueue_style( 'PriceComparator-Animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css' );
-  wp_enqueue_style( 'PriceComparator-Animate', get_template_directory_uri() . '/pricitor/css/animate.css' );
+  wp_enqueue_style( 'PriceComparator-Animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css' );
+  //wp_enqueue_style( 'PriceComparator-Animate', get_template_directory_uri() . '/pricitor/css/animate.css' );
 
  // wp_enqueue_style( 'PriceComparator-bootstrapthemestyle', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css'  );
-  wp_enqueue_style( 'PriceComparator-bootstrapthemestyle', '/pricitor/css/bootstrap-theme.min.css'  );
+  //wp_enqueue_style( 'PriceComparator-bootstrapthemestyle', get_template_directory_uri() .'/pricitor/css/bootstrap-theme.min.css'  );
   //wp_style_add_data( 'PriceComparator-bootstrapthemestyle', 'title2', 'bootstraptheme' );
 
 //load font-awesome stylesheet
