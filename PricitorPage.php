@@ -62,7 +62,7 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
 
   <div id="bootstyle" class="container">
 
-  <div class="well">
+  <div class="well semi-transparent-well add-small-gap">
 
   <h1 id="topBlurb">Going skiing or snowboarding?</h1>
   <h3>
@@ -82,7 +82,7 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
   <input type="hidden" name="package_hidden" id="packageHidden" value=<?php echo $package; ?>>
   <input type="hidden" name="packageName_hidden" id="packageNameHidden" value="<?php echo htmlspecialchars($packageName);?>">
   <input type="hidden" name="packageId_hidden" id="packageIdHidden" value="<?php echo htmlspecialchars($packageId);?>">
-  <div class="well">
+  <div class="well semi-transparent-well">
   <div class="container-fluid add-small-gap">
   <!--add a row to contain the error labels -->
   <div class = "row">

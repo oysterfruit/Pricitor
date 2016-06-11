@@ -2,11 +2,11 @@
   <!-- <div class="first-background"> around the results area-->
   <div class="container add-end-gap">
 
-<div id= "tableWell" class="well well-lg">
+<div id= "tableWell" class="well well-lg semi-transparent-well">
     <div class="table-responsive" id="priceTable">
       <h1 id="tableBlurb" class="text-center">Best Deals for <b><?PHP echo $packageName; ?></b> heading to <b><?PHP echo $resortName; ?></b> picking up on <b><?php echo date_format(date_create($startdate),"M d");?></b></h1>
-      <nav>
-  <ul class="pager pad-left-160">
+      <nav class="myHide-sm">
+  <ul class="pager pad-left-350">
     <li class="previous" id = "Previous7"><a href="#"><span aria-hidden="true">&larr;</span> Previous 7 days</a></li>
     <li class="next" id ="Next7"><a href="#">Next 7 days<span aria-hidden="true">&rarr;</span></a></li>
   </ul>

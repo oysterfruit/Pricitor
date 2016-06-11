@@ -80,12 +80,12 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
      $table_headers = $table_headers . "<th name=" . $col_name;
     if (strtotime($loop_date) < strtotime($active_page_start) || (strtotime($loop_date) > strtotime($active_page_end))){
 
-       $table_headers = $table_headers . " class='myHide center_cell'";
+       $table_headers = $table_headers . " class='myHide center_cell myHide-sm'";
      }
      else
      {
        if (strtotime($loop_date) >= strtotime($startdate) && strtotime($loop_date) <= strtotime($duration_end)){
-         $table_headers = $table_headers . " class='info center_cell'";
+         $table_headers = $table_headers . " class='info center_cell myHide-sm'";
 
          //store the col id's of the start and end cols of the chosen dates
          if (strtotime($loop_date) == strtotime($startdate)){
@@ -99,7 +99,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
        }
        else
        {
-         $table_headers = $table_headers . " class='center_cell'";
+         $table_headers = $table_headers . " class='center_cell myHide-sm'";
        }
      }
 
@@ -143,7 +143,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
     $cheapest_row = 1;
     while($row = $result->fetch_assoc()) {
       $str_weblink = $row["weblink"];
-      $str_gobutton = "<td><a href='" . $str_weblink . "' target='_blank' role='button' class='btn btn-info'><i class='fa fa-shopping-bag' aria-hidden='true'></i></a></td>";
+      $str_gobutton = "<td class='center_cell'><a href='" . $str_weblink . "' target='_blank' role='button' class='btn btn-info'><i class='fa fa-shopping-bag' aria-hidden='true'></i></a></td>";
       $retailer_name = $row["name"];
       $retailer_id = $row["retailer_id"];
       $sql2 = "SELECT Start_date, End_Date, Price FROM price WHERE retailer_id = " . $retailer_id . " AND package_id = " . $package . " AND Days = " . $days;
@@ -182,13 +182,13 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
           //work out whether to show or hide this column
           if (strtotime($loop_date) < strtotime($active_page_start) || (strtotime($loop_date) > strtotime($active_page_end)))
             {
-              $str_row = $str_row . " class='myHide center_cell'"; //cell off screen so hide it
+              $str_row = $str_row . " class='myHide center_cell myHide-sm'"; //cell off screen so hide it
             }
             else
            { //if the current cell is during the selected holiday period....
              if (strtotime($loop_date) >= strtotime($startdate) && strtotime($loop_date) <= strtotime($duration_end)){
-               $str_row = $str_row . " class='info center_cell'";
-               $str_total = "<td>$". sprintf('%01.0f', $price) . "</td>"; //total price for selected days
+               $str_row = $str_row . " class='info center_cell myHide-sm'";
+               $str_total = "<td name=colTotal class='center_cell'>$". sprintf('%01.0f', $price) . "</td>"; //total price for selected days
                if ($lowest_price == 0 && $price != "n/a"){
                  $lowest_price = $price;
                  $cheapest_row = $retailer_id;
@@ -201,7 +201,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
                 }
              }
               else{
-                 $str_row = $str_row . " class='center_cell'"; //not in selected holiday period, center cell but don't highlight
+                 $str_row = $str_row . " class='center_cell myHide-sm'"; //not in selected holiday period, center cell but don't highlight
               }
             }
 

@@ -208,6 +208,10 @@
     var endColID = jQuery("#selectedColEnd").text();
     var i = parseInt(startColID);
     var j = parseInt(endColID);
+
+     //highlight total for cheapest retailer
+    jQuery('tr[name=cost' + rowID + '] > td[name=colTotal]').addClass('success');
+
     while (i <= j){
         jQuery('tr[name=cost' + rowID + '] > td[name=tcol' + i + ']').removeClass('info');
         jQuery('tr[name=cost' + rowID + '] > td[name=tcol' + i + ']').addClass('success');
