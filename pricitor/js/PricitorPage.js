@@ -190,15 +190,16 @@
 
 
     //if the table exists set focus to the table, otherwise set focus to the resort selector
+    //window.setTimeout(1000);
     if (jQuery('#tableBlurb').length) {
        //alert("here!");
         var new_position = jQuery('#tableBlurb').offset();
-        window.scrollTo(new_position.left,new_position.top-20);
+        window.scrollTo(new_position.left,new_position.top-100);
         jQuery('#tableWell').focus();
     }
     else{
       var new_position = jQuery('#topBlurb').offset();
-      window.scrollTo(new_position.left,new_position.top);
+      window.scrollTo(new_position.left,new_position.top-20);
       jQuery('#resortSelect').focus();
     }
 
