@@ -178,7 +178,7 @@
     //values are read from the $_POST object into hidden fields via PHP
     //and read from those fields to set the correct options here.
 
-
+    //alert("here!");
     var vPack = jQuery('#packageIdHidden').val();
     jQuery('#' + vPack).prop('checked', true);
 
@@ -188,20 +188,6 @@
     var vDays = jQuery('#daysHidden').val();
     jQuery('#daysSelect option[value=' + vDays + ']').prop('selected','selected');
 
-
-    //if the table exists set focus to the table, otherwise set focus to the resort selector
-    //window.setTimeout(1000);
-    if (jQuery('#tableBlurb').length) {
-       //alert("here!");
-        var new_position = jQuery('#tableBlurb').offset();
-        window.scrollTo(new_position.left,new_position.top-100);
-        jQuery('#tableWell').focus();
-    }
-    else{
-      var new_position = jQuery('#topBlurb').offset();
-      window.scrollTo(new_position.left,new_position.top-20);
-      jQuery('#resortSelect').focus();
-    }
 
     //highlight the cheapest price row
     var rowID = jQuery("#cheapestRow").text();
@@ -218,6 +204,18 @@
         jQuery('tr[name=cost' + rowID + '] > td[name=tcol' + i + ']').addClass('success');
         i = i+1;
       }
+
+    //if the table exists scroll to the table
+
+    if (jQuery('#tableBlurb').length) {
+       //alert("here!");
+        var new_position = jQuery('#tableBlurb').offset();
+     //spent ages trying to get this to work on Chrome and Safari - yay for stackoverflow!
+      window.setTimeout(function() {
+      window.scrollTo(new_position.left,new_position.top-100);
+      }, 0);
+
+    }
 
   }); //end document ready function
 
