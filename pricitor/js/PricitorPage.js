@@ -69,6 +69,19 @@
                  jQuery("#daysError").text("");
                }
 
+             // var selId = "test";
+              selId = jQuery("#adultsSelect").find(':selected').val();
+
+              if (selId <1){
+                //display error and don't submit form
+                jQuery("#adultsError").text("Oops! You need to select at least 1 adult.");
+                  bValid = false;
+              }
+             else{
+                 //clear error text
+                 jQuery("#adultsError").text("");
+               }
+
 
               if (isValidDate(jQuery("#startDate"), 'dd M yy') == false){
                 //display error and don't submit form
@@ -187,6 +200,12 @@
 
     var vDays = jQuery('#daysHidden').val();
     jQuery('#daysSelect option[value=' + vDays + ']').prop('selected','selected');
+
+    var vAdults = jQuery('#adultsHidden').val();
+    jQuery('#adultsSelect option[value=' + vAdults + ']').prop('selected','selected');
+
+    var vKids = jQuery('#kidsHidden').val();
+    jQuery('#kidsSelect option[value=' + vKids + ']').prop('selected','selected');
 
 
     //highlight the cheapest price row

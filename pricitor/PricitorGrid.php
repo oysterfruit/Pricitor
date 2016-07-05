@@ -1,6 +1,6 @@
 <!-- start of results table area -->
   <!-- <div class="first-background"> around the results area-->
-  <div class="container add-end-gap">
+  <!--<div class="container add-end-gap">-->
 
 <div id= "tableWell" class="well well-lg semi-transparent-well">
     <div class="table-responsive" id="priceTable">
@@ -28,7 +28,7 @@
 
 </div>
 </div>
-    </div>
+   <!-- </div>-->
   <!-- </div> -->
 
 

@@ -19,7 +19,7 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
 
 
   // define variables and set to empty values
-  $startdate = $package= $packageName= $packageId= $resort= $resortName= $days='';
+  $startdate = $package= $packageName= $packageId= $resort= $resortName= $days= $adults= $kids='';
   //check if the form has already been submitted, if so, read the selected options
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,6 +31,8 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
     $resort = test_input($_POST["resort_select"]);
     $resortName = test_input($_POST["resortName_hidden"]);
     $days = test_input($_POST["days_select"]);
+    $adults = test_input($_POST["adults_select"]);
+    $kids = test_input($_POST["kids_select"]);
   }
   else
   {
@@ -42,6 +44,8 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
     }*/
     $startdate = "[--which date?--]";
     $days = "[--days?--]";
+    $adults = "1";
+    $kids = "0";
     $resort = "[--which resort?--]";
     $resortName = "";
     $package = "1";
@@ -78,6 +82,8 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
   <input type="hidden" name="resort_hidden" id="resortHidden" value=<?php echo $resort;?>>
   <input type="hidden" name="resortName_hidden" id="resortNameHidden" value="<?php echo htmlspecialchars($resortName);?>">
   <input type="hidden" name="days_hidden" id="daysHidden" value=<?php echo $days;?>>
+  <input type="hidden" name="adults_hidden" id="adultsHidden" value=<?php echo $adults;?>>
+  <input type="hidden" name="kids_hidden" id="kidsHidden" value=<?php echo $kids;?>>
   <input type="hidden" name="startdate_hidden" id="startdateHidden" value=<?php echo $startdate; ?>>
   <input type="hidden" name="package_hidden" id="packageHidden" value=<?php echo $package; ?>>
   <input type="hidden" name="packageName_hidden" id="packageNameHidden" value="<?php echo htmlspecialchars($packageName);?>">
@@ -85,12 +91,12 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
   <div class="well semi-transparent-well">
   <div class="container-fluid add-small-gap">
   <!--add a row to contain the error labels -->
-  <div class = "row">
+  <div class = "row"> <!-- start row 1 -->
       <div class = "col-md-3 col-md-offset-2"><label id="resortError" class="label label-warning"></label></div>
       <div class = "col-md-2 col-md-offset-1"><label id="daysError" class="label label-warning"></label></div>
       <div class = "col-md-3 col-md-offset-1"><label id="dateError" class="label label-warning"></label></div>
-  </div>
-  <div class="row">
+  </div> <!-- end row 1 -->
+  <div class="row"> <!-- start row 2 -->
         <div class="col-md-2">
             <h4>I'm heading to</h4>
         </div>
@@ -137,7 +143,7 @@ try {
 
   ?> <!--end php -->
     </select>
-          </div>
+          </div><!-- end col 1 row 2 -->
         <div class="col-md-3">
             <div class="row">
               <div class="col-md-4 text-right text-left-sm">
@@ -178,8 +184,8 @@ try {
                 <option value="14">14 days</option>
               </select>
               </div>
-          </div>
-        </div>
+          </div> <!-- end internal row  -->
+        </div> <!-- end  col 2 row 2 -->
 
         <div class="col-md-4" >
           <div class="row">
@@ -194,19 +200,19 @@ try {
                 <label for="startDate" class="input-group-addon btn"><span class="fa fa-calendar"></span></label>
               </div>
            </div>
-          </div>
+          </div><!-- end internal row -->
 
-        </div>
+        </div> <!-- end col 3 row 2 -->
 
-     </div>
-  </div>
+     </div> <!-- end row 2 -->
+
 
 <!-- end -->
 
 <!-- Product Options - 3 equal columns-->
 
-    <div class="container-fluid add-small-gap add-small-end-gap">
-     <div class="row">
+
+     <div class="row add-small-gap"> <!-- start row 3 -->
            <div class="col-md-2"><h4>
             I need to hire for</h4></div>
           <div class="col-md-3 col-offset-10 ">
@@ -236,21 +242,88 @@ try {
             <label class="radio" id="sbbjp1">
             <input type="radio" name="selected_package" id="sbbjp" value="9">Snowboard, boots, jacket and pants</label>
        </div>
-    </div>
-    </div>
-    <div class="container container-fluid add-small-gap">
-      <div class="row add-sm-gap">
+    </div> <!-- end row 3 -->
+    <div class = "row"> <!-- start row 4 -->
+      <div class = "col-md-3 col-md-offset-2"><label id="adultsError" class="label label-warning"></label></div>
+  </div> <!-- end row 4 -->
+    <div class = "row add-small-gap"> <!-- start row 5 -->
+      <div class = "col-md-2">
+      <h4>For</h4>
+      </div>
+      <div class = "col-md-2">
+      <select name="adults_select" id="adultsSelect" class="form-control dropdown-select" data-style="btn-warning" aria-labelledby="dropdownAdults">
+              <?php
+                //if $adults is an integer this means the forn has been posted so don't add default line to the options
+                if (!filter_var($adults, FILTER_VALIDATE_INT) === false)
+                {
+                //do nothing, it's a valid int so references one of the options which will be set using jquery on document ready
+
+                }
+                else
+                {
+                  //need to display adults?
+                  $optionD = "<option selected disabled value=''> ";
+                  $optionD .= $adults;
+                  $optionD .= "</option>";
+                  echo $optionD;
+                }?>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+      </div>
+      <div class = "col-md-2">
+      <h4>Adults and</h4>
+      </div>
+      <div class = "col-md-2">
+      <select name="kids_select" id="kidsSelect" class="form-control dropdown-select" data-style="btn-warning" aria-labelledby="dropdownKids">
+              <?php
+                //if $kids is an integer this means the forn has been posted so don't add default line to the options
+                if (!filter_var($kids, FILTER_VALIDATE_INT) === false)
+                {
+                //do nothing, it's a valid int so references one of the options which will be set using jquery on document ready
+
+                }
+                else
+                {
+                  //need to display kids?
+                  $optionD = "<option selected disabled value=''> ";
+                  $optionD .= $kids;
+                  $optionD .= "</option>";
+                  echo $optionD;
+                }?>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+      </div>
+      <div class = "col-md-4 ">
+      <h4>Kids (age 14 and under)</h4>
+      </div>
+    </div> <!-- end row 5 -->
+      <div class="row add-medium-gap"> <!-- start row 5 -->
           <div class="col-md-12 text-center">
             <!--<a class="btn btn-primary lg-go-btn" href="#" role="button" type="submit">Go</a>-->
             <input id="btnGo" type="Submit" value="go" class = "btn btn-primary btn-size-lg">
         </div>
-      </div>
-    </div>
+      </div> <!-- end row 5 -->
+     </div> <!-- end container -->
     </div> <!-- end second well -->
     </form> <!-- form -->
-
-
-    </div> <!--container -->
 
 <!-- end -->
   <!-- </div> div background -->
