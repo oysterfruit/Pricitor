@@ -4,7 +4,24 @@
 
 <div id= "tableWell" class="well well-lg semi-transparent-well">
     <div class="table-responsive" id="priceTable">
-      <h1 id="tableBlurb" class="text-center">Best Deals for <b><?PHP echo $packageName; ?></b> heading to <b><?PHP echo $resortName; ?></b> picking up on <b><?php echo date_format(date_create($startdate),"M d");?></b></h1>
+      <h1 id="tableBlurb" class="text-center">Best Deals for <b><a href="#packageSelect"><?PHP echo $packageName; ?></a></b> heading to <b><a href="#resortSelect"><?PHP echo $resortName; ?></a></b> picking up on
+        <b><a href="#daysSelect"><?php echo date_format(date_create($startdate),"l F d");?></a></b> for <a href="#adultsSelect"><b>
+        <?PHP if ($adults ==1){
+        $adults_kids = " 1 Adult";
+      }else{
+          $adults_kids = $adults . " Adults";
+        }
+
+  if ($kids <> "0"){
+    $adults_kids .= " and ";
+    if ($kids==1){
+      $adults_kids .= "1 Kid";
+    }else{
+      $adults_kids.= $kids . " Kids";
+      }
+  }
+    echo $adults_kids;
+?></a></b>.</h1>
       <nav class="myHide-sm">
   <ul class="pager pad-left-350">
     <li class="previous" id = "Previous7"><a href="#"><span aria-hidden="true">&larr;</span> Previous 7 days</a></li>

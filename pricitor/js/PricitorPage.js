@@ -27,6 +27,7 @@
 
                 });
 
+
       //save the package name for display in result header
       jQuery('input[name=selected_package]:radio').change(function ()  {
 
@@ -38,6 +39,24 @@
               jQuery("#packageNameHidden").val(pacTxt);
 
               });
+
+
+    //will add smooth scrolling to any anchor
+    $('a[href^="#"]').on('click', function(event) {
+
+    var target = $(this.getAttribute('href'));
+    var newPos = target.offset().top;
+      newPos = newPos-100;
+
+      if( target.length ) {
+        event.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: newPos
+        }, 1000);
+      }
+
+      });
+
 
       //trap the form submit to validate entries
            jQuery('#myForm').submit(function() {
@@ -224,16 +243,11 @@
         i = i+1;
       }
 
-    //if the table exists scroll to the table
+    //if the table exists smooth scroll to the table
 
     if (jQuery('#tableBlurb').length) {
-       //alert("here!");
-        var new_position = jQuery('#tableBlurb').offset();
-     //spent ages trying to get this to work on Chrome and Safari - yay for stackoverflow!
-      window.setTimeout(function() {
-      window.scrollTo(new_position.left,new_position.top-100);
-      }, 0);
 
+      $("html, body").animate({ scrollTop: $('#tableBlurb').offset().top - 100 }, 1000);
     }
 
   }); //end document ready function

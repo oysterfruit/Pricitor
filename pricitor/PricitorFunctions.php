@@ -62,4 +62,15 @@ function getSeasonEndDate() {
     return $date_str;
 }
 
+//get adults and kids blurb
+function getAdultsandKids(){
+  $adults_kids = $adults . " adults";
+  if ($kids <> "0"){
+    $adults_kids .= " and " . $kids . " kids.";
+
+  }else{
+    $adults_kids .= ".";
+  }
+  return $adults_kids;
+}
 ?>

@@ -8,18 +8,16 @@ Template Name: PricitorPage
   define('DOCROOT', realpath(dirname(__FILE__)));
   //echo DOCROOT;
 
+ // define variables and set to empty values
+  $startdate = $package= $packageName= $packageId= $resort= $resortName= $days= $adults= $kids='';
 
 //set up jquery, javascript and enqueue required files
 
 require DOCROOT . '/pricitor/PricitorFunctions.php';
-?>
 
 
-  <?php
 
 
-  // define variables and set to empty values
-  $startdate = $package= $packageName= $packageId= $resort= $resortName= $days= $adults= $kids='';
   //check if the form has already been submitted, if so, read the selected options
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -44,8 +42,8 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
     }*/
     $startdate = "[--which date?--]";
     $days = "[--days?--]";
-    $adults = "1";
-    $kids = "0";
+    $adults = "temp";
+    $kids = "temp";
     $resort = "[--which resort?--]";
     $resortName = "";
     $package = "1";
@@ -66,7 +64,7 @@ require DOCROOT . '/pricitor/PricitorFunctions.php';
 
   <div id="bootstyle" class="container">
 
-  <div class="well semi-transparent-well add-small-gap">
+  <div id="search" class="well semi-transparent-well add-small-gap">
 
   <h1 id="topBlurb">Going skiing or snowboarding?</h1>
   <h3>
@@ -212,7 +210,7 @@ try {
 <!-- Product Options - 3 equal columns-->
 
 
-     <div class="row add-small-gap"> <!-- start row 3 -->
+     <div id="packageSelect" class="row add-small-gap"> <!-- start row 3 -->
            <div class="col-md-2"><h4>
             I need to hire for</h4></div>
           <div class="col-md-3 col-offset-10 ">
@@ -262,9 +260,7 @@ try {
                 else
                 {
                   //need to display adults?
-                  $optionD = "<option selected disabled value=''> ";
-                  $optionD .= $adults;
-                  $optionD .= "</option>";
+                  $optionD = "<option selected value='1'>1</option>";
                   echo $optionD;
                 }?>
                 <option value="0">0</option>
@@ -294,9 +290,7 @@ try {
                 else
                 {
                   //need to display kids?
-                  $optionD = "<option selected disabled value=''> ";
-                  $optionD .= $kids;
-                  $optionD .= "</option>";
+                  $optionD = "<option selected value='0'>0</option>";
                   echo $optionD;
                 }?>
                 <option value="0">0</option>
