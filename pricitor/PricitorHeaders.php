@@ -131,7 +131,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
 
   //find all the retailers that service the selected resort
 
-  $sql = "SELECT DISTINCT retailer.name, retailer.weblink, resort_retailer.retailer_id FROM retailer, resort_retailer WHERE resort_retailer.retailer_id = retailer.id and resort_retailer.resort_id = " . $resort;
+  $sql = "SELECT DISTINCT retailer.name, retailer.location, retailer.Internal_link, retailer.Store_discount_active, retailer.Store_discount_perc, retailer.weblink, resort_retailer.retailer_id FROM retailer, resort_retailer WHERE resort_retailer.retailer_id = retailer.id and resort_retailer.resort_id = " . $resort;
   $result = $conn->query($sql);
   $table_data = $str_total= $str_retailer= $str_weblink= $str_gobutton= $retailer_name= $str_row= $cheapest_row= $price_startdate= $price_enddate="";
   if ($result->num_rows > 0) {
@@ -146,7 +146,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
       $str_gobutton = "<td class='center_cell'><a href='" . $str_weblink . "' target='_blank' role='button' class='btn btn-info'><i class='fa fa-shopping-bag' aria-hidden='true'></i></a></td>";
       $retailer_name = $row["name"];
       $retailer_id = $row["retailer_id"];
-      $sql2 = "SELECT Start_date, End_Date, Price FROM price WHERE retailer_id = " . $retailer_id . " AND package_id = " . $package . " AND Days = " . $days;
+      $sql2 = "SELECT Start_date, End_Date, Price, Price_child FROM price WHERE retailer_id = " . $retailer_id . " AND package_id = " . $package . " AND Days = " . $days;
 
       $result2 = $conn->query($sql2);
 
@@ -168,14 +168,20 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
           $str_row = $str_row . "<td name=" . $col_name;
 
           //set price to n/a if no price found for that date
+          $total_price = "n/a";
           $price = "n/a";
+          $price_child = "n/a";
           $j = 0; //array counter
           for ($j = 0; $j < count($price_array); $j++) {
             $price_startdate = $price_array[$j]['Start_date'];
             $price_enddate = $price_array[$j]['End_Date'];
             if (strtotime($loop_date) >= strtotime($price_startdate) && strtotime($loop_date) <= strtotime($price_enddate)) {
               $price = $price_array[$j]['Price'];
-                     break;
+              $price_child = $price_array[$j]['Price_child'];
+              $total_adults = $price * $adults;
+              $total_kids = $price_child *$kids;
+              $total_price = $total_adults + $total_kids;
+              break;
             }
           }//end for loop
 
@@ -188,14 +194,14 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
            { //if the current cell is during the selected holiday period....
              if (strtotime($loop_date) >= strtotime($startdate) && strtotime($loop_date) <= strtotime($duration_end)){
                $str_row = $str_row . " class='info center_cell myHide-sm'";
-               $str_total = "<td name=colTotal class='center_cell'>$". sprintf('%01.0f', $price) . "</td>"; //total price for selected days
-               if ($lowest_price == 0 && $price != "n/a"){
+               $str_total = "<td name=colTotal data-toggle='popover' data-trigger='hover' title= 'Adult: $" . sprintf('%01.0f', $price) . ", Child: $" . sprintf('%01.0f', $price_child). "' class='center_cell'>$". sprintf('%01.0f', $total_price) . "</td>"; //total price for selected days
+               if ($lowest_price == 0 && $total_price != "n/a"){
                  $lowest_price = $price;
                  $cheapest_row = $retailer_id;
                }
                else{
-                 if ($price < $lowest_price){
-                   $lowest_price = $price;
+                 if ($total_price < $lowest_price){
+                   $lowest_price = $total_price;
                    $cheapest_row = $retailer_id;
                  }
                 }
@@ -204,8 +210,8 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
                  $str_row = $str_row . " class='center_cell myHide-sm'"; //not in selected holiday period, center cell but don't highlight
               }
             }
-
-            $str_row = $str_row . ">$". sprintf('%01.0f', $price/$days) . "</td>";
+            //the db price is for the total days, divide by $days to display the price per day in the grid
+            $str_row = $str_row .  ">$". sprintf('%01.0f', $total_price/$days) . "</td>";
             $loop_date = date ("Y-m-d", strtotime("+1 day", strtotime($loop_date)));
             $i = $i+1;
         }//price per day loop
