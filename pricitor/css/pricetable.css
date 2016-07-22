@@ -26,6 +26,7 @@
 .btn-size-lg{
   width: 200px;
   height: 50px;
+  font-size: 26px;
 }
 
 .btn-go{
@@ -199,13 +200,19 @@
 .center_cell{
   text-align: center;
   vertical-align: middle;
+  /*display: table-cell;*/
 }
 
 /*this hides the scroll bar on the table*/
 table {
   overflow-y:hidden;
 }
+//color and size icon
 
+.icon_notify{
+  color: red;
+
+}
 
 /* Small devices (tablets,mobiles up to 992px) */
 @media (max-width: 992px) {

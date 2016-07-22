@@ -67,7 +67,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
 
 
 //set up table headers
-  $table_headers = "<thead><tr><th class='col-fixed-160'>Retailer</th><th>Total</th><th></th>";
+  $table_headers = "<thead><tr><th class='col-fixed-160'>Retailer</th><th></th><th>Total</th><th></th>";
   $loop_date = $season_start_date;
   $i=1;
 
@@ -131,7 +131,7 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
 
   //find all the retailers that service the selected resort
 
-  $sql = "SELECT DISTINCT retailer.name, retailer.location, retailer.Internal_link, retailer.Store_discount_active, retailer.Store_discount_perc, retailer.weblink, resort_retailer.retailer_id FROM retailer, resort_retailer WHERE resort_retailer.retailer_id = retailer.id and resort_retailer.resort_id = " . $resort;
+  $sql = "SELECT DISTINCT retailer.name, retailer.location, retailer.Internal_link, retailer.Store_discount_active, retailer.Store_discount_perc, retailer.Store_discount_desc, retailer.weblink, resort_retailer.retailer_id FROM retailer, resort_retailer WHERE resort_retailer.retailer_id = retailer.id and resort_retailer.resort_id = " . $resort;
   $result = $conn->query($sql);
   $table_data = $str_total= $str_retailer= $str_weblink= $str_gobutton= $retailer_name= $str_row= $cheapest_row= $price_startdate= $price_enddate="";
   if ($result->num_rows > 0) {
@@ -143,9 +143,20 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
     $cheapest_row = 1;
     while($row = $result->fetch_assoc()) {
       $str_weblink = $row["weblink"];
+      $str_internalLink = $row["Internal_link"];
+      $str_store_discount_active = $row["Store_discount_active"];
+      $str_discount_perc = $row["Store_discount_perc"];
+      $str_discount_desc = $row["Store_discount_desc"];
       $str_gobutton = "<td class='center_cell'><a href='" . $str_weblink . "' target='_blank' role='button' class='btn btn-info'><i class='fa fa-shopping-bag' aria-hidden='true'></i></a></td>";
       $retailer_name = $row["name"];
       $retailer_id = $row["retailer_id"];
+
+      //first check if there is a discount and get it into the correct format
+      if ($str_store_discount_active == 1){
+          $str_discount_perc = 100 - $str_discount_perc;
+          $str_discount_perc = $str_discount_perc/100;
+      }
+
       $sql2 = "SELECT Start_date, End_Date, Price, Price_child FROM price WHERE retailer_id = " . $retailer_id . " AND package_id = " . $package . " AND Days = " . $days;
 
       $result2 = $conn->query($sql2);
@@ -178,6 +189,11 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
             if (strtotime($loop_date) >= strtotime($price_startdate) && strtotime($loop_date) <= strtotime($price_enddate)) {
               $price = $price_array[$j]['Price'];
               $price_child = $price_array[$j]['Price_child'];
+              //first check if there is a discount and apply it
+              if ($str_store_discount_active == 1){
+                $price = $price * $str_discount_perc;
+                $price_child = $price_child * $str_discount_perc;
+              }
               $total_adults = $price * $adults;
               $total_kids = $price_child *$kids;
               $total_price = $total_adults + $total_kids;
@@ -196,11 +212,12 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
                $str_row = $str_row . " class='info center_cell myHide-sm'";
                $str_total = "<td name=colTotal data-toggle='popover' data-trigger='hover' title= 'Adult: $" . sprintf('%01.0f', $price) . ", Child: $" . sprintf('%01.0f', $price_child). "' class='center_cell'>$". sprintf('%01.0f', $total_price) . "</td>"; //total price for selected days
                if ($lowest_price == 0 && $total_price != "n/a"){
-                 $lowest_price = $price;
+                 $lowest_price = $total_price;
                  $cheapest_row = $retailer_id;
                }
                else{
                  if ($total_price < $lowest_price){
+
                    $lowest_price = $total_price;
                    $cheapest_row = $retailer_id;
                  }
@@ -211,12 +228,26 @@ $duration_end = date("Y-m-d", strtotime($end_date_str, strtotime($startdate)));
               }
             }
             //the db price is for the total days, divide by $days to display the price per day in the grid
+
             $str_row = $str_row .  ">$". sprintf('%01.0f', $total_price/$days) . "</td>";
+
             $loop_date = date ("Y-m-d", strtotime("+1 day", strtotime($loop_date)));
             $i = $i+1;
         }//price per day loop
-      $str_retailer = "<tr name=cost" . $retailer_id . "><td>". $retailer_name. "</td>";
-      $table_data = $table_data . $str_retailer . $str_total . $str_gobutton . $str_row . "</tr>";
+      //set up start of row with retailer, internal link, any discount
+      $str_retailer = "<tr name=cost" . $retailer_id . "><td><a href='". $str_internalLink . "' target='_blank'>" . $retailer_name. "</a></td>";
+        if ($str_store_discount_active == 1){
+            //add flame icon and popover text
+            $str_retailer .= "<td><span class='fa-stack fa-lg text-warning' aria-hidden='true' data-toggle='popover' data-trigger='hover' title='" . $str_discount_desc . "'>
+            <i class='fa fa-circle fa-stack-2x'></i>
+            <i class='fa fa-bolt fa-stack-1x fa-inverse'></i></td>";
+        }else
+          //add blank cell
+        {
+          $str_retailer .= "<td></td>";
+        }
+
+        $table_data = $table_data . $str_retailer . $str_total . $str_gobutton . $str_row . "</tr>";
 
       }//check if data returned from price query
     }//retailer/row while loop end
